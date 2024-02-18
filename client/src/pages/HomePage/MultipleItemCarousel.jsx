@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from 'react-slick'; 
-import { topMeals } from "../data/topMeals"; // Import topMeals data
+import { topMeals } from "../../data/topMeals"; // Import topMeals data
 import CarouselItem from "./CarouselItem"; // Import CarouselItem component
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

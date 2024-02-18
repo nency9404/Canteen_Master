@@ -1,6 +1,8 @@
 import React from 'react';
-import "../style/HomePage.css";
+import "../../style/HomePage.css";
 import MultipleItemCarousel from './MultipleItemCarousel';
+import {canteens} from '../../data/canteens';
+import CanteenCard from './CanteenCard';
 
 export default function HomePage() {
   return (
@@ -19,7 +21,18 @@ export default function HomePage() {
           <p className='text-2xl font-semibold text-gray-400 py-3 pb-10'>Top Meals</p>
         </div>
         <MultipleItemCarousel/>
+
+        
       </section>
+      <section className='p-5 lg:px-20'>
+          <div>
+            <h1 className='text-2xl font-semibold text-gray-400 py-3'>Explore Our Menu</h1>
+            <div className='flex flex-wrap items-center justify-around'>
+              {canteens.map((item,index) => <CanteenCard item={item} index={index}/>)}
+            </div>
+          </div>
+
+        </section>
     </div>
   );
 }

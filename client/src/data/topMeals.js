@@ -26,6 +26,26 @@ export const topMeals = [
     {
         image : "https://c1.wallpaperflare.com/preview/990/515/805/puff-pastry-puff-paste-bakery-sweets.jpg",
         title: "Puff"
+    },
+    {
+        image : "https://www.shutterstock.com/image-photo/chole-bhature-north-indian-food-600nw-2238261205.jpg",
+        title: "Chole Bhature"
+    },
+    {
+        image: "https://www.rajbhog.com/wp-content/uploads/2021/05/Methi-Thepla.jpg",
+        title: "Thepla"
+    },
+    {
+        image: "https://5.imimg.com/data5/NY/GQ/SB/SELLER-39270477/mixed-vegetable-cutlet.jpg",
+        title: "Cutlet"
+    },
+    {
+        image: "https://img.freepik.com/free-photo/crispy-french-fries-with-ketchup-mayonnaise_1150-26588.jpg?size=626&ext=jpg&ga=GA1.1.1700460183.1708214400&semt=ais",
+        title: "French Fries"
+    },
+    {
+        image: "https://t3.ftcdn.net/jpg/04/47/95/48/360_F_447954890_nYoJ3Lm6OElMe0LogDry2KfHF4tXsfMw.jpg",
+        title: "Manchurian"
     }
     
   ];
