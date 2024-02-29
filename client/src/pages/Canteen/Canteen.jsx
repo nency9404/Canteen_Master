@@ -8,11 +8,12 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
+// import MenuItemcard from "./MenuItemCard";
 import MenuItemCard from "./MenuItemCard";
 
 
 const categories = ["Thali", "Dessert", "Chineese", "Italian"];
-const menu = [1,1,1,1,1,1];
+const menu = [1, 1, 1, 1, 1, 1];
 const Canteen = () => {
   const [selectedCategory, setSelectedCategory] = useState();
   const handleCategoryChange = () => {
@@ -21,7 +22,7 @@ const Canteen = () => {
   return (
     <div className="px-5 lg:px-20">
       <section>
-        <h3 className="text-gray-500 py-2 mt-10">{`Home/Cantten 1/2`}</h3>
+        <h3 className="text-gray-500 py-2 mt-10">{`Home/Canteen 1/2`}</h3>
         <div>
           <img
             className="w-full h-[40vh] object-cover"
@@ -62,11 +63,12 @@ const Canteen = () => {
               </FormControl>
             </div>
             <Divider />
-            
           </Card>
         </div>
-        <div className="">
-            {menu.map((item) => <MenuItemCard item={item} />)}
+        <div className="lg:w-[80%] space-y-5 lg:pl-10">
+          {menu.map((item) => (
+            <MenuItemCard item={item} />
+          ))}
         </div>
       </section>
     </div>
