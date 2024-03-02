@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CanteenServiceImpl implements CanteenService{
+public class CanteenServiceImp implements CanteenService{
 
     @Autowired
     private CanteenRepository canteenRepository;
@@ -77,12 +77,12 @@ public class CanteenServiceImpl implements CanteenService{
     @Override
     public Canteen getCanteenByUserId(Long userId) throws Exception {
 
-        Canteen canteen = canteenRepository.findByOwnerid(userId);
-
-        if(canteen == null){
-            throw new Exception("canteen not found with ownerId : " + userId);
-        }
-        return canteen;
+//        Canteen canteen = canteenRepository.findByOwnerid(userId);
+//
+//        if(canteen == null){
+//            throw new Exception("canteen not found with ownerId : " + userId);
+//        }
+        return null;
     }
 
     @Override

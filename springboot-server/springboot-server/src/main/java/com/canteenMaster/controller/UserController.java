@@ -4,6 +4,7 @@ import com.canteenMaster.model.Cart;
 import com.canteenMaster.model.User;
 import com.canteenMaster.repository.CartRepository;
 import com.canteenMaster.repository.UserRepository;
+import com.canteenMaster.response.AuthResponse;
 import com.canteenMaster.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,8 +56,12 @@ public class UserController {
         cart.setCustomer(savedUser);
         cartRepository.save(cart);
 
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setMessage("Register success");
+        authResponse.setRole(savedUser.getRole());
 
-        return ResponseEntity.ok("User created successfully.");
+
+        return ResponseEntity.ok("User created successfully as " + user.getRole());
     }
 
     @PostMapping("/signin")
@@ -68,7 +73,7 @@ public class UserController {
 
         if (existingUser != null && password.equals(existingUser.getPassword())) {
             // If both email and password match, return a success message
-            return ResponseEntity.ok("Logged in successfully.");
+            return ResponseEntity.ok("Logged in successfully." + existingUser.getRole());
         } else {
             // If the user doesn't exist or the password doesn't match, return a message to sign up
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password. Please sign up.");
