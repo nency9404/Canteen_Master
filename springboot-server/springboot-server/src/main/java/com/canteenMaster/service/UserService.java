@@ -23,19 +23,9 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public ResponseEntity<String> createUser(User user) {
-        // Check if the email already exists in the database
-        User existingUser = userRepository.findByEmail(user.getEmail());
-        if (existingUser != null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email is already registered. Please sign in instead.");
-        }
-
-        // Proceed with user creation if the email is not already registered
-        User savedUser = userRepository.save(user);
-
-        // You can add additional logic here if needed
-
-        return ResponseEntity.ok("User created successfully.");
+    public User createUser(User user) {
+        // Add any necessary validation or processing before saving the user
+        return userRepository.save(user);
     }
 
     public ResponseEntity<String> signinUser(String email, String password) {
