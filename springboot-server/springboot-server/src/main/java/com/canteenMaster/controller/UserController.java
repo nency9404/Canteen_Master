@@ -3,6 +3,7 @@ package com.canteenMaster.controller;
 import com.canteenMaster.model.User;
 import com.canteenMaster.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +26,16 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public User createUser(@RequestBody User user) {
+    public ResponseEntity<String> createUser(@RequestBody User user) {
         return userService.createUser(user);
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<String> signin(@RequestBody User user) {
+        String email = user.getEmail();
+        String password = user.getPassword();
+
+        return userService.signinUser(email, password);
     }
 
     @PutMapping("/{id}")
