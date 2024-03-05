@@ -25,5 +25,5 @@ public class User {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "customer")
-    private List<Order> orders = new ArrayList<>();
+    private List<ItemsOrder> itemsOrders = new ArrayList<>();
 }

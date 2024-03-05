@@ -17,7 +17,7 @@ import java.util.List;
 public class Canteen {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @OneToOne
@@ -31,7 +31,7 @@ public class Canteen {
     private String openingHours;
 
     @OneToMany(mappedBy = "canteen",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Order> orders = new ArrayList<>();
+    private List<ItemsOrder> itemsOrders = new ArrayList<>();
 
     @ElementCollection
     @Column(length = 1000)
