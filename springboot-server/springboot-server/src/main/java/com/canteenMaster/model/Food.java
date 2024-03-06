@@ -14,11 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 public class Food {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
-    private String price;
+    private Long price;
 
     @ManyToOne
     private Category foodCategory;

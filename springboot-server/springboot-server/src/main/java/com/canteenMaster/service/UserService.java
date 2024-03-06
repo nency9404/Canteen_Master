@@ -68,4 +68,13 @@ public class UserService {
         // If no user is logged in or the user's role cannot be determined, return null
         return null;
     }
+
+    public ResponseEntity<?> findUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user found with email: " + email);
+        }
+    }
 }

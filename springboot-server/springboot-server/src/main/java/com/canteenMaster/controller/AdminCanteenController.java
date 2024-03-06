@@ -24,15 +24,26 @@ public class AdminCanteenController {
     private UserRepository userRepository;
 
     @PostMapping("/create")
-    public ResponseEntity<Canteen> createCanteen(
+    public ResponseEntity<?> createCanteen(
             @RequestBody CreateCanteenRequest req,
             @RequestParam("email") String userEmail
     ){
-//        String email = user.getEmail();
-        User existingUser = userRepository.findByEmail(userEmail);
+        // Check if the user exists with the provided email
+        ResponseEntity<?> existingUserResponse = userService.findUserByEmail(userEmail);
 
-        Canteen canteen = canteenService.createCanteen(req,existingUser);
-        return new ResponseEntity<>(canteen,HttpStatus.CREATED);
+        // If the user exists
+        if (existingUserResponse.getStatusCode() == HttpStatus.OK) {
+            User existingUser = (User) existingUserResponse.getBody();
+
+            // Create canteen and associate it with the existing user
+            Canteen canteen = canteenService.createCanteen(req, existingUser);
+
+            // Return canteen details along with existing user
+            return new ResponseEntity<>(canteen,HttpStatus.CREATED);
+        } else {
+            // If no user found, return the response as is
+            return existingUserResponse;
+        }
     }
 
     @PutMapping("/{id}")
