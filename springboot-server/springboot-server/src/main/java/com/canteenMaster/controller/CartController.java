@@ -2,9 +2,12 @@ package com.canteenMaster.controller;
 
 import com.canteenMaster.model.Cart;
 import com.canteenMaster.model.CartItem;
+import com.canteenMaster.model.User;
+import com.canteenMaster.repository.UserRepository;
 import com.canteenMaster.request.AddCartItemRequest;
 import com.canteenMaster.request.UpdateCartItemRequest;
 import com.canteenMaster.service.CartService;
+import com.canteenMaster.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,12 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @PutMapping("/cart/add")
     public ResponseEntity<CartItem> addItemToCart(
@@ -52,8 +61,9 @@ public class CartController {
     public ResponseEntity<Cart> removeCartItem(
             @RequestParam("email") String userEmail
     ) throws Exception {
-
-        Cart cart = cartService.clearCart(userEmail);
+        ResponseEntity<?> existingUserResponse = userService.findUserByEmail(userEmail);
+        User existingUser = (User) existingUserResponse.getBody();
+        Cart cart = cartService.clearCart(existingUser.getId());
 
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
@@ -63,7 +73,10 @@ public class CartController {
             @RequestParam("email") String userEmail
     ) throws Exception {
 
-        Cart cart = cartService.findCartByUserId(userEmail);
+        ResponseEntity<?> existingUserResponse = userService.findUserByEmail(userEmail);
+        User existingUser = (User) existingUserResponse.getBody();
+        Cart cart = cartService.findCartByUserId(existingUser.getId());
+
 
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
