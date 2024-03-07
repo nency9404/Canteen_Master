@@ -61,8 +61,9 @@ export default function Navbar() {
             <PersonIcon sx={{ fontSize: "1.5rem" }} />
           </IconButton>
         )} */}
-        
-        <span
+
+        {false ? (
+          <span
             id="basic-button"
             aria-controls={openMenu ? "basic-menu" : undefined}
             aria-haspopup="true"
@@ -70,11 +71,16 @@ export default function Navbar() {
             onClick={true ? handleOpenMenu : navigateToProfile}
             className="flex
             gap-3 justify-center font-semibold cursor-pointer"
-            style={{alignItems:"center"}}
+            style={{ alignItems: "center" }}
           >
-            <Avatar sx={{bgcolor:"white",color:pink.A400}}>C</Avatar>
+            <Avatar sx={{ bgcolor: "white", color: pink.A400 }}>C</Avatar>
             <span>Welcome!</span>
           </span>
+        ) : (
+          <IconButton onClick={() => navigate("/account/login")}>
+            <PersonIcon />
+          </IconButton>
+        )}
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}

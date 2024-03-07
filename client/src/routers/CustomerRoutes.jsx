@@ -1,10 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "../pages/HomePage/HomePage";
-import Canteen from "../pages/Canteen/Canteen";
+import HomePage from "../components/Home/HomePage";
+import Canteen from "../components/Canteen/Canteen";
 import Navbar from "../components/Navbar/Navbar";
-import Cart from "../pages/Cart/Cart";
+import Cart from "../components/Cart/Cart";
 import Profile from "../components/Profile/Profile";
+import { Auth } from "../components/Auth/Auth";
 
 export default function CustomerRoutes() {
   return (
@@ -19,6 +20,7 @@ export default function CustomerRoutes() {
         <Route path="/cart" element={<Cart/>} />
         <Route path="/my-profile/*" element={<Profile/>}/>
       </Routes>
+      <Auth/>
     </div>
   );
 }
