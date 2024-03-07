@@ -62,7 +62,7 @@ const Canteen = () => {
                 </RadioGroup>
               </FormControl>
             </div>
-            <Divider />
+           
           </Card>
         </div>
         <div className="lg:w-[80%] space-y-5 lg:pl-10">

@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import { Avatar, Badge, IconButton, Menu, MenuItem } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
+import { pink } from "@mui/material/colors";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export default function Navbar() {
         <IconButton>
           <SearchIcon sx={{ fontSize: "1.5rem" }} />
         </IconButton>
-        {true ? (
+        {/* {true ? (
           <span
             id="basic-button"
             aria-controls={openMenu ? "basic-menu" : undefined}
@@ -59,7 +60,21 @@ export default function Navbar() {
           <IconButton>
             <PersonIcon sx={{ fontSize: "1.5rem" }} />
           </IconButton>
-        )}
+        )} */}
+        
+        <span
+            id="basic-button"
+            aria-controls={openMenu ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={openMenu ? "true" : undefined}
+            onClick={true ? handleOpenMenu : navigateToProfile}
+            className="flex
+            gap-3 justify-center font-semibold cursor-pointer"
+            style={{alignItems:"center"}}
+          >
+            <Avatar sx={{bgcolor:"white",color:pink.A400}}>C</Avatar>
+            <span>Welcome!</span>
+          </span>
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}
@@ -69,12 +84,14 @@ export default function Navbar() {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={() => navigate("/admin")}>Profile</MenuItem>
+          <MenuItem onClick={() => navigate("/my-profile")}>Profile</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
 
-        <IconButton onClick={()=>navigate("/cart")}>
-          <ShoppingCartIcon sx={{ fontSize: "1.5rem" }} />
+        <IconButton onClick={() => navigate("/cart")}>
+          <Badge color="black" badgeContent={3}>
+            <ShoppingCartIcon sx={{ fontSize: "1.5rem" }} />
+          </Badge>
         </IconButton>
       </div>
     </nav>

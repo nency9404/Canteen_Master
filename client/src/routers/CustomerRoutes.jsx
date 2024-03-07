@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage/HomePage";
 import Canteen from "../pages/Canteen/Canteen";
 import Navbar from "../components/Navbar/Navbar";
 import Cart from "../pages/Cart/Cart";
+import Profile from "../components/Profile/Profile";
 
 export default function CustomerRoutes() {
   return (
@@ -13,8 +14,10 @@ export default function CustomerRoutes() {
       </div>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/account/:register" element={<HomePage/>}/>
         <Route path="/canteen/:name/:id" element={<Canteen />} />
         <Route path="/cart" element={<Cart/>} />
+        <Route path="/my-profile/*" element={<Profile/>}/>
       </Routes>
     </div>
   );
