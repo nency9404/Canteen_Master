@@ -10,6 +10,8 @@ import {
 import { Field, Formik, Form } from "formik"; // Import Form component from Formik
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../State/Authentication/Action";
+import { useDispatch } from "react-redux";
 
 const initalValues = {
   fullName: "",
@@ -20,9 +22,10 @@ const initalValues = {
 
 export const RegisterForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    console.log("form values: ",values);
+    dispatch(registerUser({ userData: values, navigate }));
   };
   return (
     <div>

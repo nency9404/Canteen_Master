@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import SearchIcon from "@mui/icons-material/Search";
@@ -6,15 +6,28 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Avatar, Badge, IconButton, Menu, MenuItem } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { pink } from "@mui/material/colors";
+import { useSelector } from "react-redux";
+import { store } from "../State/Store";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const auth = useSelector(store=>store);
+  const user = store.getState().auth.user;
+
+  // useEffect(()=>{
+  //   console.log(store.getState());
+  //   console.log(store.getState().auth.user);
+  // },[auth]);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
 
   const navigateToProfile = () => {
-    navigate("/my-profile");
+    if(user.role === "ROLE_CUSTOMER"){
+      navigate("/my-profile");
+    }else{
+      navigate("/admin/account");
+    }
   };
 
   const handleOpenMenu = (e) => {
@@ -62,7 +75,8 @@ export default function Navbar() {
           </IconButton>
         )} */}
 
-        {false ? (
+        {user ? (
+          
           <span
             id="basic-button"
             aria-controls={openMenu ? "basic-menu" : undefined}
@@ -73,7 +87,7 @@ export default function Navbar() {
             gap-3 justify-center font-semibold cursor-pointer"
             style={{ alignItems: "center" }}
           >
-            <Avatar sx={{ bgcolor: "white", color: pink.A400 }}>C</Avatar>
+            <Avatar sx={{ bgcolor: "white", color: pink.A400 }}>{user?.fullName[0].toUpperCase()}</Avatar>
             <span>Welcome!</span>
           </span>
         ) : (

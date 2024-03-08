@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> createUser(@RequestBody User user) throws Exception {
+    public ResponseEntity<?> createUser(@RequestBody User user) throws Exception {
         User isEmailExist = userRepository.findByEmail(user.getEmail());
         if(isEmailExist!=null){
             return ResponseEntity.ok("Email id connected with another account...");
@@ -61,11 +62,11 @@ public class UserController {
         authResponse.setRole(savedUser.getRole());
 
 
-        return ResponseEntity.ok("User created successfully as " + user.getRole());
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<String> signin(@RequestBody User user) {
+    public ResponseEntity<?> signin(@RequestBody User user) {
         String email = user.getEmail();
         String password = user.getPassword();
 
@@ -73,10 +74,10 @@ public class UserController {
 
         if (existingUser != null && password.equals(existingUser.getPassword())) {
             // If both email and password match, return a success message
-            return ResponseEntity.ok("Logged in successfully." + existingUser.getRole());
+            return ResponseEntity.ok(existingUser);
         } else {
             // If the user doesn't exist or the password doesn't match, return a message to sign up
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password. Please sign up.");
+            return ResponseEntity.ok("Invalid email or password. Please sign up.");
         }
     }
 
