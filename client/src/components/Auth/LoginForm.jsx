@@ -11,9 +11,9 @@ export const LoginForm = () => {
 
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
-
-    }
+    const handleSubmit = (values) => {
+      console.log("form values: ",values);
+    };
   return (
     <div>
       <Typography variant="h5" className="text-center">

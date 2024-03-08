@@ -12,7 +12,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const initalValues = {
-  fullname: "",
+  fullName: "",
   email: "",
   password: "",
   role: "ROLE_CUSTOMER",
@@ -21,7 +21,9 @@ const initalValues = {
 export const RegisterForm = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = () => {};
+  const handleSubmit = (values) => {
+    console.log("form values: ",values);
+  };
   return (
     <div>
       <Typography variant="h5" className="text-center">
@@ -55,6 +57,7 @@ export const RegisterForm = () => {
             fullWidth
             variant="outlined"
             margin="normal"
+            type="password"
           />
 
           
