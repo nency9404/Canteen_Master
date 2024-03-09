@@ -24,7 +24,7 @@ public class OrderController {
     @Autowired
     private UserService userService;
 
-    @PutMapping("/order")
+    @PostMapping("/order")
     public ResponseEntity<?> createOrder(
             @RequestBody OrderRequest req,
             @RequestParam("email") String userEmail
@@ -47,7 +47,6 @@ public class OrderController {
 
     @GetMapping("/order/user")
     public ResponseEntity<?> getOrderHistory(
-            @RequestBody OrderRequest req,
             @RequestParam("email") String userEmail
     ) throws Exception {
         ResponseEntity<?> existingUserResponse = userService.findUserByEmail(userEmail);

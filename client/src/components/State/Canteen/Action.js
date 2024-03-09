@@ -1,6 +1,6 @@
 import axios from "axios";
-import { API_URL, api } from "../../Config/api";
-import { CREATE_CANTEEN_FAILURE, CREATE_CANTEEN_REQUEST, CREATE_CANTEEN_SUCCESS, DELETE_CANTEEN_FAILURE, DELETE_CANTEEN_REQUEST, DELETE_CANTEEN_SUCCESS, GET_ALL_CANTEEN_FAILURE, GET_ALL_CANTEEN_REQUEST, GET_ALL_CANTEEN_SUCCESS, GET_CANTEEN_BY_USER_ID_FAILURE, GET_CANTEEN_BY_USER_ID_REQUEST, GET_CANTEEN_BY_USER_ID_SUCCESS, UPDATE_CANTEEN_FAILURE, UPDATE_CANTEEN_REQUEST, UPDATE_CANTEEN_STATUS_FAILURE, UPDATE_CANTEEN_STATUS_REQUEST, UPDATE_CANTEEN_STATUS_SUCCESS, UPDATE_CANTEEN_SUCCESS } from "./ActionType";
+import { API_URL } from "../../Config/api";
+import { CREATE_CANTEEN_FAILURE, CREATE_CANTEEN_REQUEST, CREATE_CANTEEN_SUCCESS, CREATE_CATEGORY_FAILURE, CREATE_CATEGORY_REQUEST, CREATE_CATEGORY_SUCCESS, DELETE_CANTEEN_FAILURE, DELETE_CANTEEN_REQUEST, DELETE_CANTEEN_SUCCESS, GET_ALL_CANTEEN_FAILURE, GET_ALL_CANTEEN_REQUEST, GET_ALL_CANTEEN_SUCCESS, GET_CANTEEN_BY_USER_ID_FAILURE, GET_CANTEEN_BY_USER_ID_REQUEST, GET_CANTEEN_BY_USER_ID_SUCCESS, GET_CANTEEN_CATEGORY_FAILURE, GET_CANTEEN_CATEGORY_REQUEST, GET_CANTEEN_CATEGORY_SUCCESS, UPDATE_CANTEEN_FAILURE, UPDATE_CANTEEN_REQUEST, UPDATE_CANTEEN_STATUS_FAILURE, UPDATE_CANTEEN_STATUS_REQUEST, UPDATE_CANTEEN_STATUS_SUCCESS, UPDATE_CANTEEN_SUCCESS } from "./ActionType";
 
 
 export const getAllCanteensAction = () => {
@@ -84,7 +84,7 @@ export const deleteCanteen = ({canteenId})=>{
             dispatch({type:DELETE_CANTEEN_FAILURE,payload:error});
         }
     }
-}
+};
 
 export const updateCanteenStatus = ({canteenId})=>{
     return async(dispatch) => {
@@ -99,5 +99,38 @@ export const updateCanteenStatus = ({canteenId})=>{
             dispatch({type:UPDATE_CANTEEN_STATUS_FAILURE,payload:error});
         }
     }
-}
+};
 
+export const createCategoryAction = ({reqdata,userEmail})=>{
+    return async (dispatch) => {
+        dispatch({type:CREATE_CATEGORY_REQUEST});
+
+        try {
+            const res = await axios.post(`${API_URL}/api/admin/category`,reqdata,{
+                params: {email:userEmail},
+            });
+            console.log("create category ",res.data);
+            dispatch({type:CREATE_CATEGORY_SUCCESS,payload:res.data});
+        } catch (error) {
+            console.log("catch error ",error);
+            dispatch({type:CREATE_CATEGORY_FAILURE,payload:error});
+        }
+    }
+};
+
+export const getCanteenCategory = ({userEmail})=>{
+    return async (dispatch) => {
+        dispatch({type:GET_CANTEEN_CATEGORY_REQUEST});
+
+        try {
+            const res = await axios.post(`${API_URL}/api/category/canteen`,{
+                params: {email:userEmail},
+            });
+            console.log("get canteen category ",res.data);
+            dispatch({type:GET_CANTEEN_CATEGORY_SUCCESS,payload:res.data});
+        } catch (error) {
+            console.log("catch error ",error);
+            dispatch({type:GET_CANTEEN_CATEGORY_FAILURE,payload:error});
+        }
+    }
+};

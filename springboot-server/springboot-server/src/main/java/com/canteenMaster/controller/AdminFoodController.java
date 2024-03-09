@@ -49,7 +49,7 @@ public class AdminFoodController {
     }
 
 
-    @PostMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteFood(@PathVariable Long id) throws Exception {
         foodService.deleteFood(id);
         MessageResponse res = new MessageResponse();
@@ -59,7 +59,7 @@ public class AdminFoodController {
 
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Food> updateFoodAvaibilityStatus(@PathVariable Long id) throws Exception {
 
         Food food = foodService.updateAvailabilityStatus(id);

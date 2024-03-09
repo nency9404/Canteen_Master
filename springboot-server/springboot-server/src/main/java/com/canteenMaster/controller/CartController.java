@@ -58,7 +58,7 @@ public class CartController {
     }
 
     @PutMapping("/cart/clear")
-    public ResponseEntity<Cart> removeCartItem(
+    public ResponseEntity<Cart> clearCart(
             @RequestParam("email") String userEmail
     ) throws Exception {
         ResponseEntity<?> existingUserResponse = userService.findUserByEmail(userEmail);
@@ -80,4 +80,5 @@ public class CartController {
 
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }
+
 }
