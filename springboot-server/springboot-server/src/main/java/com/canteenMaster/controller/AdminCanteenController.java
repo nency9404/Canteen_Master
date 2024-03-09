@@ -49,14 +49,11 @@ public class AdminCanteenController {
     @PutMapping("/{id}")
     public ResponseEntity<Canteen> updateCanteen(
             @RequestBody CreateCanteenRequest req,
-            @RequestParam("email") String userEmail,
             @PathVariable Long id
     ) throws Exception {
-//        String email = user.getEmail();
-        User existingUser = userRepository.findByEmail(userEmail);
 
         Canteen canteen = canteenService.updateCanteen(id,req);
-        return new ResponseEntity<>(canteen,HttpStatus.CREATED);
+        return new ResponseEntity<>(canteen,HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -81,7 +78,7 @@ public class AdminCanteenController {
         return new ResponseEntity<>(canteen,HttpStatus.OK);
     }
 
-    @GetMapping("/status")
+    @GetMapping("/user")
     public ResponseEntity<Canteen> findCanteenByUserId(
             @RequestParam("email") String userEmail
     ) throws Exception {

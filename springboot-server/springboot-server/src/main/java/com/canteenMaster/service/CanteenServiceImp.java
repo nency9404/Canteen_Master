@@ -77,12 +77,12 @@ public class CanteenServiceImp implements CanteenService{
     @Override
     public Canteen getCanteenByUserId(Long userId) throws Exception {
 
-//        Canteen canteen = canteenRepository.findByOwnerid(userId);
-//
-//        if(canteen == null){
-//            throw new Exception("canteen not found with ownerId : " + userId);
-//        }
-        return null;
+        Canteen canteen = canteenRepository.findByOwnerId(userId);
+
+        if(canteen == null){
+            throw new Exception("canteen not found with ownerId : " + userId);
+        }
+        return canteen;
     }
 
     @Override

@@ -28,24 +28,24 @@ public class AdminFoodController {
 
     @PostMapping
     public ResponseEntity<?> createFood(
-            @RequestBody CreateFoodRequest req,
-            @RequestParam("email") String userEmail
+            @RequestBody CreateFoodRequest req
+//            @RequestParam("email") String userEmail
             ) throws Exception {
 
-        ResponseEntity<?> existingUserResponse = userService.findUserByEmail(userEmail);
+//        ResponseEntity<?> existingUserResponse = userService.findUserByEmail(userEmail);
 
         // If the user exists
-        if (existingUserResponse.getStatusCode() == HttpStatus.OK) {
-            User existingUser = (User) existingUserResponse.getBody();
+//        if (existingUserResponse.getStatusCode() == HttpStatus.OK) {
+//            User existingUser = (User) existingUserResponse.getBody();
 
             Canteen canteen = canteenService.findCanteenById(req.getCanteenId());
             Food food = foodService.createFood(req,req.getCategory(),canteen);
 
             return new ResponseEntity<>(food,HttpStatus.CREATED);
-        } else {
-            // If no user found, return the response as is
-            return existingUserResponse;
-        }
+//        } else {
+//            // If no user found, return the response as is
+//            return existingUserResponse;
+//        }
     }
 
 

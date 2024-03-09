@@ -3,6 +3,7 @@ import {
   GET_USER_SUCCESS,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  LOGOUT,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
 } from "./ActionType";
@@ -37,6 +38,9 @@ export const authReducer = (state = initialState, action) => {
           ...state,
           isLoading: false,
         };
+
+      case LOGOUT:
+        return initialState;
 
     default:
       return state;

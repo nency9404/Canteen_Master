@@ -48,7 +48,7 @@ export default function Navbar() {
           className="lg-mr-10 cursor-pointer flex items-center space-x-4"
           onClick={() => navigate("/")}
         >
-          <li className="logo font-semibold text-gray-300 text-2xl">
+          <li onClick={()=>navigate("/")} className="logo font-semibold text-gray-300 text-2xl">
             CanteenMaster
           </li>
         </div>
