@@ -9,10 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/food")
+@CrossOrigin(origins = "http://localhost:3000")
 public class FoodController {
 
     @Autowired
@@ -39,7 +41,7 @@ public class FoodController {
     ) throws Exception {
         List<Food> foods = foodService.getCanteenFood(canteenId,food_category);
 
-        return new ResponseEntity<>(foods,HttpStatus.CREATED);
+        return new ResponseEntity<>(foods,HttpStatus.OK);
 
     }
 }

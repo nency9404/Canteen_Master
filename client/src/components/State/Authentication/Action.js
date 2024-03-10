@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-    GET_USER_FAILURE,
+  GET_USER_FAILURE,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   LOGIN_FAILURE,
@@ -21,14 +21,13 @@ export const registerUser = (reqdata) => async (dispatch) => {
       reqdata.userData
     );
 
-    localStorage.setItem("email",data.email);
+    sessionStorage.setItem("email", data.email);
 
     if (data.role === "ROLE_CANTEEN_OWNER") {
       console.log(data.role);
       reqdata.navigate("/admin/canteen");
     } else {
       reqdata.navigate("/");
-
     }
 
     const payload = {
@@ -37,9 +36,9 @@ export const registerUser = (reqdata) => async (dispatch) => {
     };
     dispatch({ type: REGISTER_SUCCESS, payload });
 
-    console.log("Register success : ",data);
+    console.log("Register success : ", data);
   } catch (error) {
-    dispatch({type:REGISTER_FAILURE,payload:error});
+    dispatch({ type: REGISTER_FAILURE, payload: error });
     console.log("error : ", error);
   }
 };
@@ -52,7 +51,7 @@ export const loginUser = (reqdata) => async (dispatch) => {
       reqdata.userData
     );
 
-    localStorage.setItem("email",data.email);
+    sessionStorage.setItem("email", data.email);
 
     if (data.role === "ROLE_CANTEEN_OWNER") {
       reqdata.navigate("/admin/canteen");
@@ -68,9 +67,10 @@ export const loginUser = (reqdata) => async (dispatch) => {
     // console.log("named",data.fullName);
 
     dispatch({ type: LOGIN_SUCCESS, payload });
-    console.log("Login success : ",data);
+    console.log("Login success: ", data);
+    sessionStorage.setItem("user", JSON.stringify(data)); // Stringify the user data
   } catch (error) {
-    dispatch({type:LOGIN_FAILURE,payload:error})
+    dispatch({ type: LOGIN_FAILURE, payload: error });
     console.log("error : ", error);
   }
 };
@@ -80,20 +80,19 @@ export const getUser = (email) => async (dispatch) => {
   try {
     const { data } = await axios.get(`${API_URL}/api/users`);
 
-    
     dispatch({ type: GET_USER_SUCCESS });
     console.log(data);
   } catch (error) {
-    dispatch({type:GET_USER_FAILURE,payload:error});
+    dispatch({ type: GET_USER_FAILURE, payload: error });
     console.log("error : ", error);
   }
 };
 
-export const logout=()=>async(dispatch)=>{
-    try {
-        dispatch({type: LOGOUT});
-        console.log("Logout success");
-    } catch (error) {
-        console.log("error : ", error);
-    }
-}
+export const logout = () => async (dispatch) => {
+  try {
+    dispatch({ type: LOGOUT });
+    console.log("Logout success");
+  } catch (error) {
+    console.log("error : ", error);
+  }
+};

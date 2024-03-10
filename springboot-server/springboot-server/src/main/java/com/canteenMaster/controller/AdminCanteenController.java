@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/admin/canteens")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AdminCanteenController {
     @Autowired
     private CanteenService canteenService;
@@ -53,6 +54,15 @@ public class AdminCanteenController {
     ) throws Exception {
 
         Canteen canteen = canteenService.updateCanteen(id,req);
+        return new ResponseEntity<>(canteen,HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Canteen> getCanteenById(
+            @PathVariable Long id
+    ) throws Exception {
+
+        Canteen canteen = canteenService.findCanteenById(id);
         return new ResponseEntity<>(canteen,HttpStatus.OK);
     }
 

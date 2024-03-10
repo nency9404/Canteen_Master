@@ -39,9 +39,16 @@ export const getMenuItemByCanteenId = ({ reqData }) => {
     dispatch({ type: GET_MENU_ITEMS_BY_CANTEEN_ID_REQUEST });
 
     try {
-      const { data } = await axios.get(
-        `${API_URL}/api/food//canteen/${reqData.canteenId}?food_category=${reqData.foodCategory}`
-      );
+      // const { data } = await axios.get(
+      //   `${API_URL}/api/food//canteen/${reqData.canteenId}?food_category=${reqData.foodCategory}`
+      // );
+
+      let url = `${API_URL}/api/food/canteen/${reqData.canteenId}?food_category=`;
+      if (reqData.foodCategory && reqData.foodCategory!=='all') {
+        url += `${reqData.foodCategory}`;
+      }
+
+      const { data } = await axios.get(url);
 
       console.log("menu item by canteen ", data);
       dispatch({ type: GET_MENU_ITEMS_BY_CANTEEN_ID_SUCCESS, payload: data });

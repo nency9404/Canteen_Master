@@ -1,11 +1,16 @@
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { clearCartAction } from "../State/Cart/Action";
 
 export default function UserProfile() {
+
+  const dispatch = useDispatch();
     
     const handleLogout = () => {
-
+      const email = sessionStorage.getItem("email");
+      dispatch(clearCartAction(email));
     }
 
   return (

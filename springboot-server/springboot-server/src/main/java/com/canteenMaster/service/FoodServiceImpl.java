@@ -8,6 +8,7 @@ import com.canteenMaster.request.CreateFoodRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,6 +28,7 @@ public class FoodServiceImpl implements FoodService {
         food.setImages(req.getImages());
         food.setName(req.getName());
         food.setPrice(req.getPrice());
+        food.setCreationDate(new Date());
 
         Food savedfood = foodRepository.save(food);
         canteen.getFoods().add(savedfood);

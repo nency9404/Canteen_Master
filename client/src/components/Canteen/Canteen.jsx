@@ -1,26 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   Divider,
   FormControl,
   FormControlLabel,
+  MenuList,
   Radio,
   RadioGroup,
   Typography,
 } from "@mui/material";
 // import MenuItemcard from "./MenuItemCard";
 import MenuItemCard from "./MenuItemCard";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCanteenById, getCanteenByUserId, getCanteenCategory } from "../State/Canteen/Action";
+import { store } from "../State/Store";
+import { getMenuItemByCanteenId } from "../State/Menu/Action";
 
 
-const categories = ["Thali", "Dessert", "Chineese", "Italian"];
-const menu = [1, 1, 1, 1, 1, 1];
+
+
 const Canteen = () => {
-  const [selectedCategory, setSelectedCategory] = useState();
-  const handleCategoryChange = () => {
-    console.log("selected category: " + selectedCategory);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const {id,name} = useParams();
+  const dispatch = useDispatch();
+  // const {canteen,menu} = useSelector((store)=>store);
+
+  const canteen = store.getState().canteen;
+  const menu = store.getState().menu;
+  console.log("canteen",canteen);
+  console.log("menu",menu);
+  useEffect(()=>{
+    const reqData = { canteenId: id, foodCategory: '' };
+    // console.log(id);
+    const userEmail = sessionStorage.getItem("email");
+    // console.log("localstorage email",email);
+    dispatch(getCanteenById(id));
+    dispatch(getCanteenCategory(userEmail));
+    dispatch(getMenuItemByCanteenId({reqData}));
+  },[]);
+
+  const handleCategoryChange = (event) => {
+    const selectedCategory = event.target.value;
+    setSelectedCategory(selectedCategory);
+    const reqData = { canteenId: id, foodCategory: selectedCategory };
+    dispatch(getMenuItemByCanteenId({reqData}));
+    // console.log("selected category: " + selectedCategory);
   };
   return (
-    <div className="px-5 lg:px-20">
+    <div className="px-5 lg:px-20 pb-10">
       <section>
         <h3 className="text-gray-500 py-2 mt-10">{`Home/Canteen 1/2`}</h3>
         <div>
@@ -31,7 +59,7 @@ const Canteen = () => {
           />
         </div>
         <div>
-          <h1 className="text-4xl py-1 font-semibold">{`Canteen 1`}</h1>
+          <h1 className="text-4xl py-1 font-semibold">{canteen.canteen?.name}</h1>
           <p className="py-3 text-orange-300">Open now 8.30am - 6pm (Today)</p>
         </div>
       </section>
@@ -50,12 +78,19 @@ const Canteen = () => {
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                 >
-                  {categories.map((item, index) => (
-                    <FormControlLabel
-                      key={index}
-                      value={item}
+                  <FormControlLabel
+                      key={0}
+                      value="all"
                       control={<Radio />}
-                      label={item}
+                      label="all"
+                      sx={{ color: "gray" }}
+                    />
+                  {canteen.categories.map((item, index) => (
+                    <FormControlLabel
+                      key={index+1}
+                      value={item.name}
+                      control={<Radio />}
+                      label={item.name}
                       sx={{ color: "gray" }}
                     />
                   ))}
@@ -66,8 +101,8 @@ const Canteen = () => {
           </Card>
         </div>
         <div className="lg:w-[80%] space-y-5 lg:pl-10">
-          {menu.map((item) => (
-            <MenuItemCard item={item} />
+          {menu.menuItems.map((items) => (
+            <MenuItemCard items={items} />
           ))}
         </div>
       </section>

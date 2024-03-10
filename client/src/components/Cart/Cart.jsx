@@ -1,16 +1,21 @@
 import React, { Fragment } from "react";
 import CartItem from "./CartItem";
 import { Divider } from "@mui/material";
+import { store } from "../State/Store";
 
-const cartItems = [1, 1, 1, 1];
+// const cartItems = [1, 1, 1, 1];
 export default function Cart() {
+  const cart = store.getState().cart;
+
+  console.log(cart);
+ 
   return (
     <Fragment>
       <main className="lg:flex justify-around">
         <section className="lg:w-[30%] space-y-6 pt-10">
           <div className="space-y-6">
-            {cartItems.map((item) => (
-              <CartItem />
+            {cart.cart.item.map((item) => (
+              <CartItem item={item} />
             ))}
           </div>
         </section>
@@ -22,22 +27,22 @@ export default function Cart() {
             <div className="space-y-3">
               <div className="flex justify-between text-gray-400">
                 <p>Item Total</p>
-                <p>₹343</p>
+                <p>₹{cart.cart.total}</p>
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>Platform Fee</p>
-                <p>₹343</p>
+                <p>₹21</p>
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>GST and Restaurant Charges</p>
-                <p>₹343</p>
+                <p>₹33</p>
               </div>
               <Divider/>
 
               <div className="flex justify-between text-gray-400">
 
                 <p>Total Pay</p>
-                <p>₹400</p>
+                <p>₹{cart.cart.total+21+33}</p>
               </div>
             </div>
           </div>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/admin/food")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AdminFoodController {
 
     @Autowired

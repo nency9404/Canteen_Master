@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../style/HomePage.css";
 import MultipleItemCarousel from "./MultipleItemCarousel";
 import { canteens } from "../../data/canteens";
 import CanteenCard from "./CanteenCard";
 import { Auth } from "../Auth/Auth";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCanteensAction } from "../State/Canteen/Action";
+import { store } from "../State/Store";
+import { findCart } from "../State/Cart/Action";
 
 export default function HomePage() {
+  const dispatch = useDispatch();
+  const email = sessionStorage.getItem("email");
+  const allCanteens = store.getState().canteen;
+  // const {allCanteens} = useSelector((store)=>store);
+
+
+  // console.log(allCanteens);
+
+  useEffect(() => {
+    dispatch(getAllCanteensAction());
+    if (email) {
+      dispatch(findCart(email));
+    }
+  }, [email]);
   return (
     <div>
       <section className="-z-50 banner relative flex flex-col justify-center items-center">
@@ -35,13 +53,12 @@ export default function HomePage() {
             Explore Our Menu
           </h1>
           <div className="flex flex-wrap items-center justify-around">
-            {canteens.map((item, index) => (
+            {allCanteens.canteens.map((item, index) => (
               <CanteenCard item={item} index={index} />
             ))}
           </div>
         </div>
       </section>
-
     </div>
   );
 }

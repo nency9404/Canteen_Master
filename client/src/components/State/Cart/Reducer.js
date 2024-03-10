@@ -62,7 +62,8 @@ const cartReducer = (state=initialState,action)=>{
             }
 
         case LOGOUT:
-            localStorage.removeItem("email");
+            sessionStorage.removeItem("user");
+            sessionStorage.removeItem("email");
             return{
                 ...state,
                 cartItems: [],

@@ -6,13 +6,15 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Avatar, Badge, IconButton, Menu, MenuItem } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import { pink } from "@mui/material/colors";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { store } from "../State/Store";
+import { getUser } from "../State/Authentication/Action";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const auth = useSelector(store=>store);
   const user = store.getState().auth.user;
+  const cart = store.getState().cart;
 
   // useEffect(()=>{
   //   console.log(store.getState());
@@ -41,6 +43,14 @@ export default function Navbar() {
   const handleLogout = () => {
     console.log("Hangle Logout");
   };
+
+  const handleCartClick =()=>{
+    if(sessionStorage.getItem("email")){
+      navigate("/cart")
+    }else{
+      navigate("/account/login");
+    }
+  }
   return (
     <nav className="px-5 z-50 py-[.8rem] bg-[#e91e63] lg:px-20 flex justify-between">
       <div className="flex items-center space-x-4">
@@ -108,8 +118,8 @@ export default function Navbar() {
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
 
-        <IconButton onClick={() => navigate("/cart")}>
-          <Badge color="black" badgeContent={3}>
+        <IconButton onClick={handleCartClick}>
+          <Badge color="black" badgeContent={cart.cart?.item.length}>
             <ShoppingCartIcon sx={{ fontSize: "1.5rem" }} />
           </Badge>
         </IconButton>
