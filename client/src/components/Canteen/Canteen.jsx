@@ -33,9 +33,11 @@ const Canteen = () => {
   useEffect(()=>{
     const reqData = { canteenId: id, foodCategory: '' };
     // console.log(id);
-    const userEmail = sessionStorage.getItem("email");
+    // const userEmail = sessionStorage.getItem("email");
     // console.log("localstorage email",email);
     dispatch(getCanteenById(id));
+    const userEmail = canteen.canteens[id-1].owner.email;
+    console.log("userEmail",userEmail);
     dispatch(getCanteenCategory(userEmail));
     dispatch(getMenuItemByCanteenId({reqData}));
   },[]);
