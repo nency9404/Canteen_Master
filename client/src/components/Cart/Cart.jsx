@@ -24,7 +24,8 @@ export default function Cart() {
           <div className="billDetails px-5 text-sm">
             <p className="font-extralight py-5">Bill Details</p>
 
-            <div className="space-y-3">
+            {cart.cart.total?
+              <div className="space-y-3">
               <div className="flex justify-between text-gray-400">
                 <p>Item Total</p>
                 <p>₹{cart.cart.total}</p>
@@ -44,7 +45,9 @@ export default function Cart() {
                 <p>Total Pay</p>
                 <p>₹{cart.cart.total+21+33}</p>
               </div>
-            </div>
+            </div>:
+            <div>No Items</div>
+            }
           </div>
         </section>
       </main>
