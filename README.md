@@ -28,7 +28,7 @@ CanteenMaster is designed to streamline the operations of a canteen, providing f
 - MySQL: A relational database management system for storing application data
 - Bootstrap: A front-end framework for designing responsive and mobile-first websites
 
-## 5. Installation:
+## 4. Installation:
 - Clone the repository: git clone <repository-url>
 - Navigate to the frontend directory and install dependencies: cd client && npm install
 - Set up the backend environment with Spring Boot and MySQL
