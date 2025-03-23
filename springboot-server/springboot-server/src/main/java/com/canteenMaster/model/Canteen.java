@@ -31,7 +31,7 @@ public class Canteen {
     private String openingHours;
 
     @OneToMany(mappedBy = "canteen",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<ItemsOrder> itemsOrders = new ArrayList<>();
+    private List<ItemsOrder> itemsOrders = new ArrayList<ItemsOrder>();
 
     @ElementCollection
     @Column(length = 1000)
